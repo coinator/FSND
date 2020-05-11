@@ -1,4 +1,6 @@
 
+### VIM TESTS
+
 ## Endpoints
 ```
 GET '/categories'
