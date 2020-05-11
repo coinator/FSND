@@ -73,17 +73,27 @@ class TriviaTestCase(unittest.TestCase):
         )
 
     def test_delete_question(self):
-        res_before = self.client().get('/questions')
-        total_before = json.loads(res_before.data)["totalQuestions"]
+        """ create question with SQL alchemy and delete with api"""
+        data = {
+            "question": "random",
+            "answer": "random",
+            "category": 1,
+            "difficulty": 1,
+        }
+        question = Question(**data)
+        question.insert()
 
-        res = self.client().delete(f"/questions/5")
+        questions_count = len(Question.query.all())
+        question_id = question.id
+
+        res = self.client().delete(f"/questions/{question.id}")
         response = json.loads(res.data)
         self.assertEqual(response, {"success": True})
 
         res = self.client().get("/questions")
         response = json.loads(res.data)
         total_after = response["totalQuestions"]
-        self.assertEqual(total_before, total_after + 1)
+        self.assertEqual(questions_count, total_after + 1)
 
     def test_delete_question_bad_id_returns_404(self):
         res = self.client().delete(f"/questions/1000001")

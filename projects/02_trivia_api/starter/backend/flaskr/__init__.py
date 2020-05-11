@@ -51,16 +51,16 @@ def create_app(test_config=None):
         return jsonify({"success": False, "error": 404, "message": "Not found"}), 404
 
     @app.errorhandler(422)
-    def not_found(error):
+    def unprocessable_entity(error):
         return (
             jsonify(
                 {"success": False, "error": 422, "message": "Unprocessable entity"}
             ),
-            404,
+            422,
         )
 
     @app.errorhandler(500)
-    def not_found(error):
+    def internal_server_error(error):
         return (
             jsonify(
                 {"success": False, "error": 500, "message": "Internal Server Error"}
@@ -108,28 +108,17 @@ def create_app(test_config=None):
             }
         )
 
-    """
-  @TODO: 
-  Create an endpoint to handle GET requests for questions, 
-  including pagination (every 10 questions). 
-  This endpoint should return a list of questions, 
-  number of total questions, current category, categories. 
-  
-  TEST: At this point, when you start the application
-  you should see questions and categories generated,
-  ten questions per page and pagination at the bottom of the screen for three pages.
-  Clicking on the page numbers should update the questions. 
-    """
-
     @app.route("/questions")
     def get_question():
         questions = Question.query.all()
 
+        # catches no questions in db
         if len(questions) == 0:
             abort(404)
 
         formatted_questions = paginate_questions(request, questions)
 
+        # catches invalid pages
         if len(formatted_questions) == 0:
             abort(404)
 
@@ -176,41 +165,10 @@ def create_app(test_config=None):
 
         if question is None:
             abort(404)
+
         question.delete()
 
         return jsonify({"success": True})
-
-    """
-  @TODO: 
-  Create a POST endpoint to get questions based on a search term. 
-  It should return any questions for whom the search term 
-  is a substring of the question. 
-
-  TEST: Search by any phrase. The questions list will update to include 
-  only question that include that string within their question. 
-  Try using the word 'title' to start. 
-  """
-
-    """
-  @TODO:
-  Create a GET endpoint to get questions based on category.
-
-  TEST: In the 'List' tab / main screen, clicking on one of the
-  categories in the left column will cause only questions of that
-  category to be shown.
-  """
-
-    """
-  @TODO:
-  Create a POST endpoint to get questions to play the quiz.
-  This endpoint should take category and previous question parameters
-  and return a random questions within the given category,
-  if provided, and that is not one of the previous questions.
-
-  TEST: In the 'Play' tab, after a user selects 'All' or a category,
-  one question at a time is displayed, the user is allowed to answer
-  and shown whether they were correct or not.
-  """
 
     @app.route("/quizzes", methods=["POST"])
     def create_quiz():
