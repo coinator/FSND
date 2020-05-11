@@ -46,6 +46,8 @@ To run the server, execute:
 flask run
 ```
 
+### VIM TESTS
+
 ## Endpoints
 ```
 GET '/categories'
