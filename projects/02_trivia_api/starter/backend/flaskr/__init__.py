@@ -141,9 +141,8 @@ def create_app(test_config=None):
         if "searchTerm" in data:
             search_term = data["searchTerm"]
             try:
-                questions = Question.query.filter(
-                    Question.question.ilike(f"%{search_term}%")
-                ).all()
+                query = Question.question.ilike(f"%{search_term}%")
+                questions = Question.query.filter(query).all()
 
                 questions = [q.format() for q in questions]
                 return jsonify({"success": True, "questions": questions})
