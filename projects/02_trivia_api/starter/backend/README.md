@@ -1,10 +1,12 @@
 # Full Stack Trivia API Backend
 
-## Getting Started
+## ο σπυροσ ειναι αρχων
 
 ### Installing Dependencies
 
 #### Python 3.6
+
+will this work??
 
 Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
