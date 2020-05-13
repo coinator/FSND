@@ -8,11 +8,12 @@ Udacity is invested in creating bonding experiences for its employees and studen
 
 That's where you come in! Help them finish the trivia app so they can start holding trivia and seeing who's the most knowledgeable of the bunch. The application must:
 
-1) DisplayMASTER
-2) Delete questions.
-3) Add questions and require that they include question and answer text.
-4) Search for questions based MASTER
-5) Play the quiz game, randomizing either all questions or within a specific category. 
+1)
+2)
+3)
+4)
+5)
+6) master wanted some other things
 
 Completing this trivia app will give you the ability to structure plan, implement, and test an API - skills essential for enabling your future applications to communicate with others. 
 
