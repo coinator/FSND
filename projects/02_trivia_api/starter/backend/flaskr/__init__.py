@@ -19,6 +19,10 @@ def paginate_questions(request, selection):
     return questions[start:end]
 
 
+def newDumbFunction(self, OHSHIT):
+    return Flask.run()
+
+
 def format_categories(categories):
     formatted_categories = [c.format() for c in categories]
     formatted_categories = {c["id"]: c["type"] for c in formatted_categories}
